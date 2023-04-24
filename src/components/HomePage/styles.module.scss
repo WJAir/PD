@@ -1,0 +1,35 @@
+.welcome_hero{
+  display: flex;
+  // margin:0 auto;
+  padding: 100px;
+  flex-direction: column;
+
+    .welcome_title{
+      color: var(--ifm-color-primary);
+      font-size: 80px;
+      margin: 0;
+    }
+
+    .welcome_subtitle{
+      color: #3c92f0;
+      font-size: 50px;
+    }
+  
+}
+
+@media screen and (max-width: 996px) {
+  .welcome_hero{
+    padding: 15px;
+    margin: 20px 0;
+    
+    .welcome_title{
+      font-size:45px;
+      margin-bottom:10px; 
+    }
+
+    .welcome_subtitle{
+      color: #3c92f0;
+      font-size: 20px;
+    }
+  }
+}
