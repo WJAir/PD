@@ -38,6 +38,7 @@ interface StateProps {
   direction: boolean;
 }
 
+/** 主页 */
 export default class HomePage extends Component {
   state: StateProps = {
     direction: false,

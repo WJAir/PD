@@ -17,19 +17,9 @@
     padding: 10px 0px 0 20px;
   }
 
-  .str_lenBox {
-    display: flex;
-    align-items: center;
-
-    .str_lenBut {
-      margin-left: 5px;
-    }
-  }
-
-  .str_resultBox {
+  .str_stringBox {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 20px;
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.scss";
+import { RandomProps } from "./interface";
 import { Input, Button, Radio, message, Tooltip } from "antd";
 import type { RadioChangeEvent } from "antd";
 import {
@@ -15,29 +16,7 @@ import clsx from "clsx";
 const TextArea = Input.TextArea;
 const RadioGroup = Radio.Group;
 
-interface RandomProps {
-  /** 获取状态位 */
-  getStrLoading: boolean;
-  /** 字符长度 */
-  strLen: string;
-  /** 结果字符串 */
-  resultString: string;
-  /** 获取的类型 */
-  type: "string" | "number" | "random";
-  /** 复制按钮操作性 */
-  copyDis: boolean;
-  /** 随机数区间可见性 */
-  display: string;
-  /** 可见性 */
-  lenDisplay: string;
-  /** 最小值 */
-  min: string;
-  /** 最大值 */
-  max: string;
-  /** 检测的字符 */
-  importString: string;
-}
-
+/** 随机值模组 */
 export default class Random extends React.Component {
   render() {
     const {
@@ -49,7 +28,6 @@ export default class Random extends React.Component {
       strLen,
       resultString,
       copyDis,
-      importString,
     } = this.state;
     return (
       <>
@@ -145,81 +123,6 @@ export default class Random extends React.Component {
             />
           </div>
         </div>
-        <div className={styles.str_container}>
-          <h1>字符长度检测：</h1>
-          <div className={clsx(styles.str_subBox, styles.str_stringBox)}>
-            <TextArea
-              placeholder="这里输入字符"
-              value={importString}
-              autoSize={{ maxRows: 10 }}
-              allowClear
-              style={{ width: 1000 }}
-              onChange={(e) => {
-                // console.log(e);
-                this.setState({
-                  importString: e.target.value,
-                });
-              }}
-            />
-            <div style={{ marginTop: 10 }}>
-              <span>当前字符长度： {importString.length}</span>
-
-              <Tooltip title="清除前方空格">
-                <Button
-                  icon={<IconToLeft />}
-                  style={{ marginLeft: 10 }}
-                  disabled={!importString.length}
-                  onClick={() => {
-                    this.setState(
-                      {
-                        importString: importString.replace(/^\s*/g, ""),
-                      },
-                      () => {
-                        message.success("success");
-                      }
-                    );
-                  }}
-                />
-              </Tooltip>
-
-              <Tooltip title="清除所有空格">
-                <Button
-                  icon={<IconSwap />}
-                  style={{ marginLeft: 10 }}
-                  disabled={!importString.length}
-                  onClick={() => {
-                    this.setState(
-                      {
-                        importString: importString.replace(/\s+/g, ""),
-                      },
-                      () => {
-                        message.success("success");
-                      }
-                    );
-                  }}
-                />
-              </Tooltip>
-
-              <Tooltip title="清除后方空格">
-                <Button
-                  icon={<IconToRight />}
-                  disabled={!importString.length}
-                  style={{ marginLeft: 10 }}
-                  onClick={() => {
-                    this.setState(
-                      {
-                        importString: importString.replace(/\s*$/g, ""),
-                      },
-                      () => {
-                        message.success("success");
-                      }
-                    );
-                  }}
-                />
-              </Tooltip>
-            </div>
-          </div>
-        </div>
       </>
     );
   }
@@ -234,7 +137,6 @@ export default class Random extends React.Component {
     lenDisplay: "",
     min: "0",
     max: "9999",
-    importString: "",
   };
 
   handelChangeType = (event: RadioChangeEvent) => {
