@@ -1,16 +1,14 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { RandomProps } from "./interface";
-import { Input, Button, Radio, message, Tooltip } from "antd";
+import { Input, InputNumber, Button, Radio, message, Tooltip } from "antd";
 import type { RadioChangeEvent } from "antd";
+import { IconCopy, IconLoop } from "@arco-design/web-react/icon";
 import {
-  IconCopy,
-  IconLoop,
-  IconToLeft,
-  IconToRight,
-  IconSwap,
-} from "@arco-design/web-react/icon";
-import { randomStringType, copy, randomNum } from "@site/src/public/src";
+  randomStringType,
+  copyToClipboard,
+  randomNum,
+} from "@site/src/public/src";
 import clsx from "clsx";
 
 const TextArea = Input.TextArea;
@@ -48,20 +46,26 @@ export default class Random extends React.Component {
           </div>
           <div style={{ display: display }} className={styles.str_subBox}>
             <span>区间：</span>
-            <Input
-              onChange={(e) => this.setState({ min: e.target.value })}
+            <InputNumber
+              onChange={(e) => this.setState({ min: e })}
               style={{ width: 100 }}
-              placeholder="-99999"
               value={min}
+              type="number"
+              min={0}
+              max={9999}
+              defaultValue={0}
             />
             ~
-            <Input
+            <InputNumber
               onChange={(e) => {
-                this.setState({ max: e.target.value });
+                console.log(e);
+                this.setState({ max: e });
               }}
               style={{ width: 100 }}
-              placeholder="99999"
               value={max}
+              min={0}
+              max={99999}
+              defaultValue={9999}
             />
             <Tooltip title="获取指定区间随机数">
               <Button
@@ -77,16 +81,14 @@ export default class Random extends React.Component {
             className={clsx(styles.str_subBox, styles.str_lenBox)}
           >
             <span>长度：</span>
-            <Input
+            <InputNumber
               onChange={(e) => {
-                this.setState({ strLen: e.target.value });
+                this.setState({ strLen: e });
               }}
-              type="number"
+              min={0}
+              max={99999}
               size="large"
-              maxLength={5}
-              // showCount
               style={{ width: 350 }}
-              allowClear
               placeholder="请输入长度"
               value={strLen}
             />
@@ -103,11 +105,10 @@ export default class Random extends React.Component {
               <Button
                 className={styles.str_lenBut}
                 onClick={() => {
-                  copy(resultString, (err: any) => {
-                    if (!err) {
-                      message.success("复制成功！");
-                    }
-                  });
+                  const res = copyToClipboard(this.state.resultString);
+                  if (res) {
+                    message.success("复制成功");
+                  }
                 }}
                 icon={<IconCopy />}
                 disabled={copyDis}
@@ -129,14 +130,14 @@ export default class Random extends React.Component {
 
   state: RandomProps = {
     getStrLoading: false,
-    strLen: "5",
+    strLen: 5,
     resultString: "",
     type: "string",
     copyDis: true,
     display: "none",
     lenDisplay: "",
-    min: "0",
-    max: "9999",
+    min: 0,
+    max: 9999,
   };
 
   handelChangeType = (event: RadioChangeEvent) => {
@@ -162,15 +163,14 @@ export default class Random extends React.Component {
 
   /** 获取随机数值 */
   getRandomNumber = () => {
-    const res = randomNum(this.state.min, this.state.max);
-
-    if (this.state.min === "") {
+    const { min, max } = this.state;
+    if (min === null || min === undefined) {
       message.error("区间起始值不能为空");
-    } else if (this.state.max === "") {
+    } else if (!max) {
       message.error("区间结束值不能为空");
     } else {
       this.setState({
-        resultString: res,
+        resultString: randomNum(min, max),
       });
     }
   };
