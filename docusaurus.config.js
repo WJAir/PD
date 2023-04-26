@@ -195,6 +195,13 @@ const config = {
             position: 'right'
           },
 
+          {
+            href: 'https://github.com/WJAir/PD',
+            position: 'right',
+            className: 'header-github-link header-icon-link',
+            'aria-label': 'GitHub repository',
+          },
+
           // {
           //   label: "docsTags",
           //   to: '/docs/tags',
