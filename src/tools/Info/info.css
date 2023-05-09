@@ -2,6 +2,7 @@
   color: var(--ifm-color-primary);
 }
 
-.other_margin {
-  margin: 100px 0;
+.pic_errP {
+  color: red;
+  margin: 0;
 }

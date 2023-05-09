@@ -1,23 +1,36 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-import { Button, Form, Input, Spin, Empty } from "antd";
+import { Button, Form, Input } from "antd";
+import { MyInfo } from "@site/src/tools/Info";
+import { ErrMsgProps } from "@site/pdType";
+import { Notifications } from "@site/src/tools/Notification";
 
 import axios from "axios";
 
+interface StateProps {
+  /** iframe的地址 */
+  iframeUrl: string;
+  /** 编号 */
+  code: string;
+  /** 错误信息 */
+  errMsg: ErrMsgProps;
+  /** 加载 */
+  loading: boolean;
+}
+
 export default class PictureIntegration extends React.Component {
-  state = {
+  state: StateProps = {
     iframeUrl: "",
     code: "",
-    msg: "",
+    errMsg: {
+      code: "",
+      message: "",
+    },
     loading: false,
   };
 
   onFinish = async (values: any) => {
-    console.log("Success:", values);
-
-    localStorage.setItem("params", JSON.stringify(values));
-
     this.setState({
       loading: true,
       code: "2",
@@ -35,41 +48,39 @@ export default class PictureIntegration extends React.Component {
 
     if (data) {
       if (data.hasOwnProperty("result")) {
-        console.log(5555);
         this.setState({
           iframeUrl: data.result.url,
           code: "1",
           loading: false,
         });
+        Notifications.success({ info: "获取成功" });
+        localStorage.setItem("getDada", JSON.stringify(values));
       }
       if (data.hasOwnProperty("error")) {
-        console.log(555555555);
         this.setState({
           code: "0",
-          msg: JSON.stringify(data.error),
+          errMsg: {
+            code: data.error.code,
+            message: data.error.message,
+          },
           loading: false,
+        });
+        Notifications.error({
+          title: "获取失败",
+          info: JSON.stringify(this.state.errMsg),
         });
       }
     }
   };
 
-  onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  onChange = (value) => {
-    console.log(value.target.value);
-  };
-
   render() {
-    const { code, msg } = this.state;
-    5;
+    const { code, errMsg } = this.state;
 
-    var content: string | number | boolean | React.ReactFragment | JSX.Element;
+    var content: React.ReactFragment | JSX.Element;
 
     switch (code) {
       case "2":
-        content = <Spin tip="Loading" />;
+        content = <MyInfo.Loading />;
         break;
 
       case "1":
@@ -79,21 +90,11 @@ export default class PictureIntegration extends React.Component {
         break;
 
       case "0":
-        content = (
-          <>
-            <img src="/img/icon/error.svg" className={styles.pic_errImg} />
-            <div>
-              <p className={styles.pic_errP}>code：{JSON.parse(msg).code}</p>
-              <p className={styles.pic_errP}>
-                message：{JSON.parse(msg).message}
-              </p>
-            </div>
-          </>
-        );
+        content = <MyInfo.Error errMsg={errMsg} />;
         break;
 
       default:
-        content = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+        content = <MyInfo.Empty />;
         break;
     }
 
@@ -109,7 +110,6 @@ export default class PictureIntegration extends React.Component {
               style={{ maxWidth: 1000, width: 500 }}
               initialValues={{ remember: true }}
               onFinish={this.onFinish}
-              onFinishFailed={this.onFinishFailed}
               autoComplete="off"
             >
               <Form.Item
@@ -163,6 +163,17 @@ export default class PictureIntegration extends React.Component {
               </Form.Item>
             </Form>
           </div>
+          {this.state.iframeUrl ? (
+            <Button
+              href={this.state.iframeUrl}
+              target="_blank"
+              aria-disabled={true}
+            >
+              访问
+            </Button>
+          ) : (
+            <></>
+          )}
           <div className={clsx(styles.pic_iframeBox)}>{content}</div>
         </div>
       </>

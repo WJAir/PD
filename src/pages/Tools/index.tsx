@@ -41,7 +41,7 @@ export default class Tools extends Component {
           tabBarExtraContent={<Button href="/">back</Button>}
           className={styles.arco_tabs_new}
           centered
-          defaultActiveKey="4"
+          defaultActiveKey="1"
           items={items}
         />
       </Layout>

@@ -6,29 +6,38 @@ Notification.config({
   maxCount: 5,
 });
 
+type NotificationsProps = {
+  /** icon */
+  icon?: ReactNode;
+  /** 标题 */
+  title?: string;
+  /** 具体信息 */
+  info: string;
+};
+
 export const Notifications = {
-  success: (icon: ReactNode, title: any, info: any) => {
+  success: ({ icon, title, info }: NotificationsProps) => {
     Notification.success({
       icon: icon,
       title: title,
       content: info,
     });
   },
-  error: (icon: ReactNode, title: any, info: any) => {
+  error: ({ icon, title, info }: NotificationsProps) => {
     Notification.error({
       icon: icon,
       title: title,
       content: info,
     });
   },
-  warning: (icon: ReactNode, title: any, info: any) => {
+  warning: ({ icon, title, info }: NotificationsProps) => {
     Notification.warning({
       icon: icon,
       title: title,
       content: info,
     });
   },
-  info: (icon: ReactNode, title: any, info: any) => {
+  info: ({ icon, title, info }: NotificationsProps) => {
     Notification.info({
       icon: icon,
       title: title,
