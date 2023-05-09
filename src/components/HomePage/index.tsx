@@ -9,8 +9,8 @@ import {
 } from "@arco-design/web-react/icon";
 import "@arco-design/web-react/dist/css/arco.css";
 import styles from "./styles.module.scss";
-import ButtonGroup from "@site/src/Plugin/ButtonGroup";
-import { ButtonProps } from "@site/src/Plugin/ButtonGroup/interface";
+import ButtonGroup from "@site/src/tools/ButtonGroup";
+import { ButtonProps } from "@site/src/tools/ButtonGroup/interface";
 
 const list: ButtonProps[] = [
   {

@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 import Random from "@site/src/components/Random";
 import DateTime from "@site/src/components/DateTime";
 import String from "@site/src/components/String";
+import PictureIntegration from "@site/src/components/PictureIntegration";
 
 import { Tabs, Button } from "antd";
 import type { TabsProps } from "antd";
@@ -25,6 +26,11 @@ const items: TabsProps["items"] = [
     label: `字符`,
     children: <String />,
   },
+  {
+    key: "4",
+    label: `画面集成`,
+    children: <PictureIntegration />,
+  },
 ];
 
 export default class Tools extends Component {
@@ -35,7 +41,7 @@ export default class Tools extends Component {
           tabBarExtraContent={<Button href="/">back</Button>}
           className={styles.arco_tabs_new}
           centered
-          defaultActiveKey="1"
+          defaultActiveKey="4"
           items={items}
         />
       </Layout>
