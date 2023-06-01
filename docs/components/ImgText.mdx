@@ -1,0 +1,77 @@
+---
+id: ImgText
+slug: /ImgText
+title: 图文 ImgText
+hide_title: true
+description: 图文组件使用说明。
+tags: [组件, 图文]
+---
+
+import ImgText from "@site/src/tools/ImgText/index.tsx";
+
+## 前言
+
+在写说明文档的时候，会差插入一些比较小的图片，相关描述会写在图片下面或者上面，界面布局不易阅读。
+
+## 基本用法
+
+<ImgText imgStyle={{ width: 300 }} />
+
+```tsx title='示例：' showLineNumbers
+import ImgText from "@site/src/utils/ImgText";
+
+<ImgText imgSrc="/pic.png" content="text content" />;
+```
+
+---
+
+## API
+
+| 参数名       | 描述             | 类型          | 默认值         |
+| ------------ | ---------------- | ------------- | -------------- |
+| imgSrc       | 图片路径         | string        | /img/Empty.png |
+| content      | 文本内容         | ReactNode     | 测试文本       |
+| style        | 外部盒子样式     | CSSProperties | -              |
+| imgStyle     | 图片盒子样式     | CSSProperties | -              |
+| contentStyle | 文本内容盒子样式 | CSSProperties | -              |
+
+---
+
+## 说明
+
+在建立说明文档时，建议使用`*.mdx`格式，这样在使用外部组件的时候，会得到更好的交互效果。
+
+:::danger 温馨提示
+
+由于图文组件底层使用`<img />`，此组件的图片路径在当前构架中无法直接解析，即无法直接使用
+
+```tsx showLineNumbers
+<ImgText imgSrc="./image/pic.png" content="text content" />
+```
+
+可以使用 ES6 语法将图片导入后使用，所有导入需要在文档最前面
+
+```tsx showLineNumbers
+import pic from "./image/pic.png";
+
+<ImgText imgSrc={pic} content="text content" />;
+```
+
+```md title='示例：' showLineNumbers
+---
+id: ImgText
+slug: /ImgText
+title: 图文 ImgText
+hide_title: true
+description: 图文组件使用说明。
+tags: [组件, 图文]
+---
+
+`import ImgText from "@site/src/tools/ImgText/index.tsx";`
+
+## 前言
+
+在写说明文档的时候，会差插入一些比较小的图片，相关描述会写在图片下面或者上面，界面布局不易阅读。
+```
+
+:::

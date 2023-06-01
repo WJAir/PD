@@ -288,6 +288,10 @@ div[class^="expandButton_"] {
   content: ".";
 }
 
+code[class^="codeBlockLines_"] {
+  font-family: var(--ifm-font-family-monospace) !important;
+}
+
 /* next pages */
 .pagination-nav__link {
   margin: em 0;
