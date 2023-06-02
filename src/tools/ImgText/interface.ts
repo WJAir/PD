@@ -8,7 +8,7 @@ export interface ImgTextProps {
   /** 文本盒子样式 */
   contentStyle?: CSSProperties;
   /** 图片路径 */
-  imgSrc?: string;
+  imgSrc?: string | boolean;
   /** 内容 */
   content?: ReactNode;
   /** 图文位置 */

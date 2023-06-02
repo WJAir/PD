@@ -1,37 +1,11 @@
 import React, { Component } from "react";
 import { Button } from "@arco-design/web-react";
-import {
-  IconFile,
-  IconRecord,
-  IconTool,
-  IconToRight,
-  IconToBottom,
-} from "@arco-design/web-react/icon";
+import { IconToRight, IconToBottom } from "@arco-design/web-react/icon";
 import "@arco-design/web-react/dist/css/arco.css";
 import styles from "./styles.module.scss";
 import ButtonGroup from "@site/src/tools/ButtonGroup";
-import { ButtonProps } from "@site/src/tools/ButtonGroup/interface";
 
-const list: ButtonProps[] = [
-  {
-    label: "名词解释",
-    type: "outline",
-    icon: <IconFile />,
-    href: "/docs/noun",
-  },
-  {
-    label: "日常记录",
-    type: "outline",
-    icon: <IconRecord />,
-    href: "/blog",
-  },
-  {
-    label: "小工具",
-    type: "outline",
-    icon: <IconTool />,
-    href: "/tools",
-  },
-];
+import { WelcomeList } from "@site/data/WelcomeList";
 
 interface StateProps {
   /** 方向 */
@@ -74,7 +48,7 @@ export default class HomePage extends Component {
         />
         <ButtonGroup
           direction={this.state.direction ? "column" : "row"}
-          buttonList={list}
+          buttonList={WelcomeList}
         />
       </div>
     );
