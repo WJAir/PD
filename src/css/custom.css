@@ -7,6 +7,9 @@
   --ifm-color-primary-lighter: #1fbfc01a;
   --ifm-color-primary-lightest: #23d8d9;
 
+  --ifm-color-primary-box-shadow: 0px 3px 10px #0000001a;
+  --ifm-color-primary-box-shadow-hover: 0px 5px 10px 5px #1fbfc01a;
+
   /* 代码块 */
   --ifm-code-background: #23affc1a;
   --ifm-code-color: #3887fe;
@@ -57,6 +60,19 @@
   --search-local-hit-background: #b3b6b9;
   --search-local-muted-color: rgb(255, 255, 255);
   --search-local-hit-color: #fff;
+}
+
+.main_title {
+  background-image: -webkit-linear-gradient(
+    35deg,
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-lightest),
+    var(--ifm-color-primary),
+    var(--ifm-color-primary-lightest)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header-icon-link {

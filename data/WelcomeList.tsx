@@ -5,20 +5,21 @@ import {
   IconCommon,
   IconRecord,
   IconTool,
+  IconBook,
 } from "@arco-design/web-react/icon";
 
 export const WelcomeList: ButtonProps[] = [
   {
-    label: "文档",
+    label: "名词",
     type: "outline",
     icon: <IconFile />,
-    href: "/docs/document",
+    href: "/docs/noun",
   },
   {
-    label: "组件",
+    label: "图文",
     type: "outline",
     icon: <IconCommon />,
-    href: "/docs/components",
+    href: "/docs/ImgText",
   },
   {
     label: "记录",
@@ -31,5 +32,11 @@ export const WelcomeList: ButtonProps[] = [
     type: "outline",
     icon: <IconTool />,
     href: "/tools",
+  },
+  {
+    label: "uxppt",
+    type: "outline",
+    icon: <IconBook />,
+    href: "/uxppt",
   },
 ];

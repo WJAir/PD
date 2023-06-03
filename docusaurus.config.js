@@ -190,8 +190,14 @@ const config = {
           },
 
           {
-            label: "工具",
+            label: "小工具",
             to: '/tools',
+            position: 'right'
+          },
+
+          {
+            label: "作品集",
+            to: '/Portfolio',
             position: 'right'
           },
 
