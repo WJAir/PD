@@ -1,5 +1,7 @@
 import React from "react";
 import "./app.scss";
+import { FloatButton } from "antd";
+import { RollbackOutlined } from "@ant-design/icons";
 import Swiper, { ReactIdSwiperProps } from "react-id-swiper";
 import "swiper/scss";
 import "animate.css";
@@ -11,62 +13,63 @@ import P4 from "./pages/p4";
 import P5 from "./pages/p5";
 import P6 from "./pages/p6";
 import P7 from "./pages/p7";
-import Layout from "@theme/Layout";
 
 export default class Uxppt extends React.Component {
   render() {
     return (
-      <Layout>
-          <div className="pages">
-            <Swiper
-              {...this.swiperConfig}
-              activeSlideKey={this.state.showPageIndex.toString()}
-              renderPagination={(props) => {
-                return (
-                  <div className="pagination">
-                    {(props.children as any[]).map((d, index) => {
-                      return (
-                        <i
-                          key={index}
-                          className={`${
-                            index == this.state.showPageIndex && "on"
-                          }`}
-                          onClick={() => this.onPage(index)}
-                        >
-                          {index + 1}
-                        </i>
-                      );
-                    })}
-                  </div>
-                );
-              }}
-            >
-              {this.pageConfigs.map((Config, pageNum) => (
-                <div key={pageNum} className={`swiper-slide  p${pageNum + 1}`}>
-                  <Config.render spaceNum={this.state.spaceNum[pageNum] || 0} />
-                </div>
-              ))}
-            </Swiper>
-            <div className="shangxia">
-              <i
-                className="iconfonthw ic-jiantou"
-                onClick={() => {
-                  this.setPageSpace({
-                    difference: -1,
-                  });
-                }}
-              />
-              <i
-                className="iconfonthw ic-jiantou"
-                onClick={() => {
-                  this.setPageSpace({
-                    difference: 1,
-                  });
-                }}
-              />
+      <div className="pages">
+        <Swiper
+          {...this.swiperConfig}
+          activeSlideKey={this.state.showPageIndex.toString()}
+          renderPagination={(props) => {
+            return (
+              <div className="pagination">
+                {(props.children as any[]).map((d, index) => {
+                  return (
+                    <i
+                      key={index}
+                      className={`${index == this.state.showPageIndex && "on"}`}
+                      onClick={() => this.onPage(index)}
+                    >
+                      {index + 1}
+                    </i>
+                  );
+                })}
+              </div>
+            );
+          }}
+        >
+          {this.pageConfigs.map((Config, pageNum) => (
+            <div key={pageNum} className={`swiper-slide  p${pageNum + 1}`}>
+              <Config.render spaceNum={this.state.spaceNum[pageNum] || 0} />
             </div>
-          </div>
-      </Layout>
+          ))}
+        </Swiper>
+        <div className="shangxia">
+          <i
+            className="iconfonthw ic-jiantou"
+            onClick={() => {
+              this.setPageSpace({
+                difference: -1,
+              });
+            }}
+          />
+          <i
+            className="iconfonthw ic-jiantou"
+            onClick={() => {
+              this.setPageSpace({
+                difference: 1,
+              });
+            }}
+          />
+        </div>
+        <FloatButton
+          icon={<RollbackOutlined />}
+          type="default"
+          href="/Portfolio"
+          tooltip="Back"
+        />
+      </div>
     );
   }
 
